@@ -10,7 +10,7 @@ This is a GitHub Action to Bump Version for Calaos Packages.
 
 |          NAME          |                                                  DESCRIPTION                                                  |   TYPE   | REQUIRED | DEFAULT       |
 |------------------------|---------------------------------------------------------------------------------------------------------------|----------|----------|---------------|
-| `version-fragment`     | The part to bump. Possible options are [ major | minor | patch | prerelease ]                                 | `string` | `true`   | `prerelease`  |
+| `version-fragment`     | The part to bump. Possible options are [ major / minor / patch / prerelease ]                                 | `string` | `true`   | `prerelease`  |
 
 ## Outputs
 
