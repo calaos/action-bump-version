@@ -10,13 +10,13 @@ This is a GitHub Action to Bump Version for Calaos Packages.
 
 |          NAME          |                                                  DESCRIPTION                                                  |   TYPE   | REQUIRED | DEFAULT       |
 |------------------------|---------------------------------------------------------------------------------------------------------------|----------|----------|---------------|
-| `version-fragment`     | The part to bump. Possible options are [ major / minor / patch / prerelease ]                                 | `string` | `true`   | `prerelease`  |
+| `version_fragment`     | The part to bump. Possible options are [ major / minor / patch / prerelease ]                                 | `string` | `true`   | `prerelease`  |
 
 ## Outputs
 
 | NAME             |                                            DESCRIPTION                                             |   TYPE   |
 |------------------|----------------------------------------------------------------------------------------------------|----------|
-| `version-bumped` | The bumped version string                                                                          | `string` |
+| `version_bumped` | The bumped version string                                                                          | `string` |
 
 ## License
 
