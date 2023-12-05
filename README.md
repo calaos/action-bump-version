@@ -1,9 +1,5 @@
 # Action Bump Version
 
-[![actions-workflow-lint][actions-workflow-lint-badge]][actions-workflow-lint]
-[![release][release-badge]][release]
-[![license][license-badge]][license]
-
 This is a GitHub Action to Bump Version for Calaos Packages.
 
 ## Inputs
