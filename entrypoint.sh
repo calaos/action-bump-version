@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -x
 
 set -e
 
@@ -6,27 +6,13 @@ repo='/github/workspace'
 
 git config --global --add safe.directory $repo
 
-git fetch --tags
+git fetch --tags > /dev/null || true
 # This suppress an error occurred when the repository is a complete one.
-git fetch --prune --unshallow || true
+git fetch --prune --unshallow > /dev/null || true
 
 last_tag='0.0.0'
 
-#get last tag in the shape of semver
-cd $repo
-for ref in $(git for-each-ref --sort=-creatordate --format '%(refname)' refs/tags); do
-    tag="${ref#refs/tags/}"
-
-    # skip if tag starts with a letter
-    case "$tag" in
-        [a-zA-Z]*)
-            continue
-            ;;
-    esac
-
-    last_tag="${tag}"
-    break
-done
+last_tag=$(/mysemver.py $repo)
 
 echo "::notice::Last version: $last_tag"
 
