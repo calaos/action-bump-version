@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 set -e
 
@@ -16,7 +16,7 @@ last_tag=$(/mysemver.py $repo)
 
 echo "::notice::Last version: $last_tag"
 
-release=$(pysemver bump "${INPUT_VERSION_FRAGMENT}" "${last_tag}")
+release=$(pysemver nextver "${last_tag}" "${INPUT_VERSION_FRAGMENT}")
 echo "::notice::Bumped version: $release"
 
 echo "version_bumped=${release}" >> $GITHUB_OUTPUT
