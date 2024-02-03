@@ -16,7 +16,7 @@ last_tag=$(/mysemver.py $repo)
 
 echo "::notice::Last version: $last_tag"
 
-release=$(pysemver nextver "${last_tag}" "${INPUT_VERSION_FRAGMENT}")
+release=$(/bump.py "${last_tag}" "${INPUT_VERSION_FRAGMENT}")
 echo "::notice::Bumped version: $release"
 
 echo "version_bumped=${release}" >> $GITHUB_OUTPUT

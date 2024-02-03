@@ -3,7 +3,7 @@ description: Bump calaos package version
 author: Calaos Team
 inputs:
   version_fragment:
-    description: 'The part to bump. Possible options are [ major | minor | patch | prerelease ]'
+    description: 'The part to bump. Possible options are [ major | minor | prerelease ]'
     required: true
 outputs:
   version_bumped:
