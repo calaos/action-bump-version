@@ -19,7 +19,7 @@ def increment_version(actual_version, fragment):
         if int(minor) % 2 == 0:
             minor = str(int(minor) + 2)
         else:
-            minor = str(int(patch) + 1)
+            minor = str(int(minor) + 1)
             patch = '0'
 
     new_version = f"{major}.{minor}.{patch}"
