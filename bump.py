@@ -4,7 +4,7 @@ import sys
 def increment_version(actual_version, fragment):
     major, minor, patch = actual_version.split('.')
 
-    if fragment == 'dev':
+    if fragment == 'prerelease':
         if int(minor) % 2 == 0:
             minor = str(int(minor) + 1)
             patch = '0'
