@@ -37,5 +37,12 @@ if __name__ == "__main__":
 
     fragment = sys.argv[2] if len(sys.argv) > 2 else 'prerelease'
 
+    #revomve the v prefix if any
+    if actual_version.startswith('v'):
+        actual_version = actual_version[1:]
+    
+    #remove anything after - if any
+    actual_version = actual_version.split('-')[0]
+
     new_version = increment_version(actual_version, fragment)
     print(new_version)
