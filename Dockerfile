@@ -1,6 +1,8 @@
-FROM alpine:latest
+FROM debian:bookworm-slim
 
-RUN apk add --update --no-cache git grep python3 py3-semver bash
+RUN apt -y update && \
+    apt -y upgrade && \
+    DEBIAN_FRONTEND=noninteractive apt-get -yqq -o DPkg::Options::="--force-confnew" install git grep python3 python3-semver bash
 
 COPY entrypoint.sh /entrypoint.sh
 COPY mysemver.py /mysemver.py

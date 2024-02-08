@@ -4,19 +4,12 @@ import subprocess
 import semver
 import functools
 
-def semver_compare(a, b):
-    if semver.Version.is_valid(a) == False:
-        return -1
-    verA = semver.Version.parse(a)
-    verB = semver.Version.parse(b)
-    return verA.compare(verB)
-
 def get_git_tags(repository_path):
     # Get all tags from the repository
     git_tags = subprocess.check_output(['git', 'tag', '-l'], cwd=repository_path).decode().splitlines()
 
-    # Sort the tags using semver.compare function
-    sorted_tags = sorted(git_tags, key=functools.cmp_to_key(semver_compare))
+    # Sort the tags using dpkg --compare-versions command
+    sorted_tags = sorted(git_tags, key=lambda x: subprocess.check_output(['dpkg', '--compare-versions', x, 'lt', git_tags[-1]]).decode().strip() == '-1')
 
     return sorted_tags
 
