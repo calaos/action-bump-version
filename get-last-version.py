@@ -9,6 +9,11 @@ def dpkg_compare(a, b):
     #replace - with ~ to make dpkg compare versions correctly
     a = a.replace('-', '~')
     b = b.replace('-', '~')
+    #remove the v prefix if any
+    if a.startswith('v'):
+        a = a[1:]
+    if b.startswith('v'):
+        b = b[1:]
     
     ret = subprocess.run(['dpkg', '--compare-versions', a, 'lt', b]).returncode
     if ret == 0:
