@@ -3,7 +3,7 @@ import sys
 
 def increment_version(actual_version, fragment):
     if '~' in actual_version:
-        ver, pre = actual_version.split('~')
+        ver, pre = actual_version.split('-')
     else:
         ver = actual_version
         pre = None
@@ -19,7 +19,7 @@ def increment_version(actual_version, fragment):
             pre[1] = str(int(pre[1]) + 1)
             pre = '.'.join(pre)
             
-        return f"{major}.{minor}.{patch}~{pre}"
+        return f"{major}.{minor}.{patch}-{pre}"
         
     elif fragment == 'major':
         return f"{int(major) + 1}.0.0"
@@ -48,8 +48,6 @@ if __name__ == "__main__":
     #remove the v prefix if any
     if actual_version.startswith('v'):
         actual_version = actual_version[1:]
-        
-    actual_version = actual_version.replace('-', '~')
 
     new_version = increment_version(actual_version, fragment)
     print(new_version)
