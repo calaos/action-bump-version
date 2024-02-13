@@ -2,28 +2,36 @@
 import sys
 
 def increment_version(actual_version, fragment):
-    major, minor, patch = actual_version.split('.')
-
+    if '~' in actual_version:
+        ver, pre = actual_version.split('~')
+    else:
+        ver = actual_version
+        pre = None
+        
+    major, minor, patch = ver.split('.')
+    
     if fragment == 'prerelease':
-        if int(minor) % 2 == 0:
-            minor = str(int(minor) + 1)
-            patch = '0'
-        else:
+        if pre is None:
+            pre = 'dev.0'
             patch = str(int(patch) + 1)
-
-    elif fragment == 'major':
-        minor = '0'
-        patch = '0'
-
-    elif fragment == 'minor':
-        if int(minor) % 2 == 0:
-            minor = str(int(minor) + 2)
         else:
-            minor = str(int(minor) + 1)
-            patch = '0'
+            pre = pre.split('.')
+            pre[1] = str(int(pre[1]) + 1)
+            pre = '.'.join(pre)
+            
+        return f"{major}.{minor}.{patch}~{pre}"
+        
+    elif fragment == 'major':
+        return f"{int(major) + 1}.0.0"
+        
+    elif fragment == 'minor':
+        return f"{major}.{int(minor) + 1}.0"
 
-    new_version = f"{major}.{minor}.{patch}"
-    return new_version
+    elif fragment == 'patch':
+        return f"{major}.{minor}.{int(patch) + 1}"
+    
+    return None
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
@@ -37,12 +45,11 @@ if __name__ == "__main__":
 
     fragment = sys.argv[2] if len(sys.argv) > 2 else 'prerelease'
 
-    #revomve the v prefix if any
+    #remove the v prefix if any
     if actual_version.startswith('v'):
         actual_version = actual_version[1:]
-    
-    #remove anything after - if any
-    actual_version = actual_version.split('-')[0]
+        
+    actual_version = actual_version.replace('-', '~')
 
     new_version = increment_version(actual_version, fragment)
     print(new_version)
