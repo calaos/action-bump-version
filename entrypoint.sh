@@ -12,7 +12,7 @@ git fetch --prune --unshallow > /dev/null || true
 
 last_tag='0.0.0'
 
-last_tag=$(/mysemver.py $repo)
+last_tag=$(/get-last-version.py --repo $repo)
 
 echo "::notice::Last version: $last_tag"
 
